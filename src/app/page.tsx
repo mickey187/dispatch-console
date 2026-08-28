@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { endShift, getScorecards, getState, postPlan } from "@/lib/api";
+import { PORTAL_BASE, endShift, getScorecards, getState, postPlan } from "@/lib/api";
 import type { FeedItem, Scorecard, Snapshot } from "@/lib/types";
 import ScorecardPanel from "@/components/ScorecardPanel";
 import ScenarioControls from "@/components/ScenarioControls";
@@ -172,7 +172,7 @@ export default function Console() {
                   {selectedStop.tracking_token ? (
                     <a
                       className="text-blue-600 hover:underline"
-                      href={`http://localhost:3001/track/${selectedStop.tracking_token}`}
+                      href={`${PORTAL_BASE}/track/${selectedStop.tracking_token}`}
                       target="_blank"
                       rel="noreferrer"
                     >

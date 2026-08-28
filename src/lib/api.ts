@@ -3,6 +3,10 @@ import type { OrderRow, Scorecard, Snapshot } from "./types";
 export const API_BASE =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api";
 
+// Public base URL of the customer portal (for "open portal" tracking links).
+export const PORTAL_BASE =
+  process.env.NEXT_PUBLIC_PORTAL_URL ?? "http://localhost:3001";
+
 async function getJson<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, { cache: "no-store" });
   if (!res.ok) throw new Error(`${path} → ${res.status}`);

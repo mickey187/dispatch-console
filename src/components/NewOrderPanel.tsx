@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { getOrders, submitOrder } from "@/lib/api";
+import { PORTAL_BASE, getOrders, submitOrder } from "@/lib/api";
 import type { OrderRow } from "@/lib/types";
 
 // Preset Chicago drop-off points (not in the seed) for one-click demoing.
@@ -106,7 +106,7 @@ export default function NewOrderPanel({ onSubmitted }: { onSubmitted: () => void
             {result.token && (
               <a
                 className="mt-1 inline-block font-medium text-blue-600 hover:underline"
-                href={`http://localhost:3001/track/${result.token}`}
+                href={`${PORTAL_BASE}/track/${result.token}`}
                 target="_blank"
                 rel="noreferrer"
               >
