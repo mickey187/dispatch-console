@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dispatcher Console (Next.js)
 
-## Getting Started
+The autonomous dispatcher's console: live fleet map, exception feed, decision inspector, escalation queue, scenario controls, live-order panel, and driver scorecards.
 
-First, run the development server:
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev -- --port 3000     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requires the API running at `http://localhost:8000` (configurable via `NEXT_PUBLIC_API_URL` in `.env.local`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What's here
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Live map** (Leaflet/OSM): driver markers move in real time, route polylines, stops colour-coded by risk (green / amber / red), depot.
+- **Feed tab**: chronological exception feed; each event shows the agent's decision (action, reasoning, messages). **Scenario controls** inject delay / breakdown / failed-delivery and a **proactive-drift** demo. Click any item to open the **decision inspector** (what happened, what the agent weighed, candidate drivers, reasoning, exact messages sent).
+- **Escalations tab**: situations the agent refused to resolve alone.
+- **Orders tab**: submit a mid-shift order and watch it get slotted or rejected; order history.
+- **Drivers tab**: reliability scorecards with trend; "End shift" recomputes scores.
 
-## Learn More
+Polls `/api/state` every 2s and `/api/drivers/scorecards` every 10s.
 
-To learn more about Next.js, take a look at the following resources:
+## Config
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`.env.local`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000/api
+```
